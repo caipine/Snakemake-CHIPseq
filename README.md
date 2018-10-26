@@ -87,20 +87,52 @@ bowtie-build /home/exx/Documents/pyflow-ChIPseq-master/ht38/Homo_sapiens.GRCh38.
 save follow text as SRR.txt
 
 sample_name fastq_name  factor
+
 MOLM-14_DMSO1_5 SRR2518123   BRD4
+
 MOLM-14_DMSO1_5 SRR2518124  Input
+
 MOLM-14_DMSO2_6 SRR2518125  BRD4
+
 MOLM-14_DMSO2_6 SRR2518126  Input
 
-/home/exx/.aspera/connect/bin/ascp -i  /home/exx/.aspera/connect/etc/asperaweb_id_dsa.openssh -k 1 -QT -l 200m anonftp@ftp-trace.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByRun/sra/SRR/SRR251/SRR2518123/SRR2518123.sra ./
+save following scripts as download_SRR.csh (adjust ascp address)
 
-/home/exx/.aspera/connect/bin/ascp -i  /home/exx/.aspera/connect/etc/asperaweb_id_dsa.openssh -k 1 -QT -l 200m anonftp@ftp-trace.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByRun/sra/SRR/SRR251/SRR2518124/SRR2518124.sra ./
+##############
 
-/home/exx/.aspera/connect/bin/ascp -i  /home/exx/.aspera/connect/etc/asperaweb_id_dsa.openssh -k 1 -QT -l 200m anonftp@ftp-trace.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByRun/sra/SRR/SRR251/SRR2518125/SRR2518125.sra ./
+#!/bin/csh -f
 
-/home/exx/.aspera/connect/bin/ascp -i  /home/exx/.aspera/connect/etc/asperaweb_id_dsa.openssh -k 1 -QT -l 200m anonftp@ftp-trace.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByRun/sra/SRR/SRR251/SRR2518126/SRR2518126.sra ./
+mkdir fastqs
 
-### sample.list making
+sed 1d SRR.txt | awk '{print $2}' > SRR.name.txt
+
+foreach i ("`cat SRR.name.txt`")
+
+    set ii =  `echo $i | cut -c1-6`
+    
+    /home/exx/.aspera/connect/bin/ascp -i \
+    
+        /home/exx/.aspera/connect/etc/asperaweb_id_dsa.openssh -k 1 -QT -l 200m \
+        
+        anonftp@ftp-trace.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByRun/sra/SRR/$ii/$i/$i.sra fastqs
+end
+
+ #########################
+ 
+  tcsh download_SRR.csh
+ 
+ # all the sra files will be downloaded in the current fastqs folder.
+ convert sra to fastqs and compress to .gz files
+
+## you can use a for loop to fastq-dump the downloaded sra files.
+find *sra| parallel -j 4  fastq-dump {}
+
+find *fastq | parallel -j 4  bgzip {}
+
+## save some space
+rm *sra
+
+## sample.list making
 python sample2json_C.py --fastq_dir fastqs/ --meta SRR.txt
 
 
