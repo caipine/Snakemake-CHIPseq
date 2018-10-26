@@ -1,8 +1,6 @@
 # Snakemake-CHIPseq
 
-a pipeline for CHIPseq analysis
-
-(this pipeline was originally  built by crazyhottommy, here I will add some messager about using experience.)
+This is a pipeline for CHIPseq analysis which was originally built by crazyhottommy (https://github.com/crazyhottommy/pyflow-ChIPseq), here I will do some modifcation to fit my  work statation.
 
 ## Installation related software in CentOS 7
 
