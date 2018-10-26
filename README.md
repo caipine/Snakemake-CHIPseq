@@ -101,6 +101,6 @@ MOLM-14_DMSO2_6 SRR2518126  Input
 /home/exx/.aspera/connect/bin/ascp -i  /home/exx/.aspera/connect/etc/asperaweb_id_dsa.openssh -k 1 -QT -l 200m anonftp@ftp-trace.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByRun/sra/SRR/SRR251/SRR2518126/SRR2518126.sra ./
 
 ### sample.list making
-
+python sample2json_C.py --fastq_dir fastqs/ --meta SRR.txt
 
 
