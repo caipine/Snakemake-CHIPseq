@@ -1,0 +1,18 @@
+{
+    "MOLM-14_DMSO1_5": {
+        "BRD4": [
+            "/home/exx/Documents/bash_flow-CHIPseq-master/fastqs/SRR2518123.fastq.gz"
+        ],
+        "Input": [
+            "/home/exx/Documents/bash_flow-CHIPseq-master/fastqs/SRR2518124.fastq.gz"
+        ]
+    },
+    "MOLM-14_DMSO2_6": {
+        "BRD4": [
+            "/home/exx/Documents/bash_flow-CHIPseq-master/fastqs/SRR2518125.fastq.gz"
+        ],
+        "Input": [
+            "/home/exx/Documents/bash_flow-CHIPseq-master/fastqs/SRR2518126.fastq.gz"
+        ]
+    }
+}
