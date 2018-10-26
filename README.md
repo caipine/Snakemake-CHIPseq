@@ -122,17 +122,17 @@ end
   tcsh download_SRR.csh
   cd fastqs
 
-  ## convert sra to fastqs and compress to .gz files
+  #### convert sra to fastqs and compress to .gz files
 
-  ## you can use a for loop to fastq-dump the downloaded sra files.
+  #### you can use a for loop to fastq-dump the downloaded sra files.
 find *sra| parallel -j 4  fastq-dump {}
 
 find *fastq | parallel -j 4  bgzip {}
 
-  ## save some space
+  #### save some space
 rm *sra
 
-  ## sample.list making
+  #### sample.list making
 python sample2json_C.py --fastq_dir fastqs/ --meta SRR.txt
 
 
