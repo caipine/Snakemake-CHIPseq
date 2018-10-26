@@ -78,7 +78,26 @@ bash
 
 ### Mapping in HPC without snakemake
 
+### reference genome file
+ftp://ftp.ensembl.org/pub/release-81/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz
+ftp://ftp.ensembl.org/pub/release-81/gtf/homo_sapiens/Homo_sapiens.GRCh38.81.gtf.gz
+bowtie-build /home/exx/Documents/pyflow-ChIPseq-master/ht38/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa ht38
+
 ### Download SRA data
+save follow text as SRR.txt
+sample_name fastq_name  factor
+MOLM-14_DMSO1_5 SRR2518123   BRD4
+MOLM-14_DMSO1_5 SRR2518124  Input
+MOLM-14_DMSO2_6 SRR2518125  BRD4
+MOLM-14_DMSO2_6 SRR2518126  Input
+
+/home/exx/.aspera/connect/bin/ascp -i  /home/exx/.aspera/connect/etc/asperaweb_id_dsa.openssh -k 1 -QT -l 200m anonftp@ftp-trace.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByRun/sra/SRR/SRR251/SRR2518123/SRR2518123.sra ./
+
+/home/exx/.aspera/connect/bin/ascp -i  /home/exx/.aspera/connect/etc/asperaweb_id_dsa.openssh -k 1 -QT -l 200m anonftp@ftp-trace.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByRun/sra/SRR/SRR251/SRR2518124/SRR2518124.sra ./
+
+/home/exx/.aspera/connect/bin/ascp -i  /home/exx/.aspera/connect/etc/asperaweb_id_dsa.openssh -k 1 -QT -l 200m anonftp@ftp-trace.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByRun/sra/SRR/SRR251/SRR2518125/SRR2518125.sra ./
+
+/home/exx/.aspera/connect/bin/ascp -i  /home/exx/.aspera/connect/etc/asperaweb_id_dsa.openssh -k 1 -QT -l 200m anonftp@ftp-trace.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByRun/sra/SRR/SRR251/SRR2518126/SRR2518126.sra ./
 
 ### sample.list making
 
