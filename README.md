@@ -64,7 +64,7 @@ biocLite("Rsamtools",suppressUpdates=TRUE)
 
 install.packages("./spp_1.14.tar.gz")   #fialed with error: cannot find Boost headers version >= 1.41.0
 
-sudo apt-get install libboost-all-dev
+sudo apt-get install libboost-all-dev   #yum install boost-devel -y
 
 R
 
