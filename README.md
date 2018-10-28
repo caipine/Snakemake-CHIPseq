@@ -71,9 +71,6 @@ R
 install.packages("./spp_1.14.tar.gz")
 
 
-
-sudo apt-get install boost-devel
-
 #### prepare ROSE
 wget https://bitbucket.org/young_computation/rose/get/1a9bb86b5464.zip
 
