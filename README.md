@@ -64,12 +64,38 @@ biocLite("Rsamtools",suppressUpdates=TRUE)
 
 install.packages("./spp_1.14.tar.gz")   #fialed with error: cannot find Boost headers version >= 1.41.0
 
-sudo apt-get install libboost-all-dev   #yum install boost-devel -y
+sudo apt-get install libboost1.54-all-dev  #yum install boost-devel -y
 
 R
 
 install.packages("./spp_1.14.tar.gz")
 
+still failed in ubuntu 18.04
+
+### https://ubuntuforums.org/showthread.php?t=2363177
+sudo apt-get --purge remove libboost-dev libboost-doc
+sudo apt-get --purge remove libboost-dev
+sudo apt-get --purge remove libboost-all-dev
+sudo apt autoremove
+
+wget https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.tar.bz2
+
+tar xvjf  boost_1_68_0.tar.bz2
+
+cd boost_1_68_0
+
+./bootstrap.sh --prefix=/usr/local
+
+sudo apt-get update
+sudo apt-get install build-essential g++ python-dev autotools-dev libicu-dev build-essential libbz2-dev libboost-all-dev
+
+./bootstrap.sh --prefix=/usr/local
+
+./b2
+
+sudo ./b2 install
+
+dpkg -s libboost-dev | grep 'Version'
 
 #### prepare ROSE
 wget https://bitbucket.org/young_computation/rose/get/1a9bb86b5464.zip
