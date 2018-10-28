@@ -19,9 +19,9 @@ pip install MACS=1.4.2
 #### download miniconda python3 64bit and install following software
 conda config --add channels defaults
 
-conda config --add channels bioconda
-
 conda config --add channels conda-forge
+
+conda config --add channels bioconda
 
 conda install multiqc
 
@@ -75,6 +75,71 @@ bash
 
 
 ### Installation related software in Ubuntu 18.04
+wget https://github.com/downloads/taoliu/MACS/MACS-1.4.2-1.tar.gz
+
+tar -zxvf MACS-1.4.2-1.tar.gz
+
+cd MACS-1.4.2-1
+
+python setup.py install
+
+macs14 -help
+
+
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+sh Miniconda3-latest-Linux-x86_64.sh
+
+bash 
+
+conda config --add channels defaults
+
+conda config --add channels conda-forge
+
+conda config --add channels bioconda
+
+conda add -c bioconda MACS2   #macs2 --help
+
+conda install multiqc
+
+conda install fastqc
+
+conda install bowtie
+
+conda install samblaster
+
+conda install samtools
+
+conda install deeptools
+
+conda install R
+
+
+
+conda install -c bioconda sambamba
+
+conda install -c bioconda sratoolkit   ##if failed, soinstall manually
+
+wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.4.1/sratoolkit.2.4.1-ubuntu64.tar.gz
+
+tar xzvf sratoolkit.2.4.1-ubuntu64.tar.gz
+
+export PATH=$PATH:/home/qcai1/Downloads/sratoolkit.2.4.1-ubuntu64/bin 
+
+conda install -c bioconda -c conda-forge snakemake  #failed
+
+Solving environment: failed
+
+UnsatisfiableError: The following specifications were found to be in conflict:
+  - snakemake
+  - subprocess32
+Use "conda info <package>" to see the dependencies for each package.
+
+sudo apt install python3-pip
+
+pip3 install snakemake  #failed
+
+sudo apt install snakemake  #works
 
 ### Mapping in HPC without snakemake
 
