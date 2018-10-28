@@ -62,9 +62,22 @@ source("http://bioconductor.org/biocLite.R")
 
 biocLite("Rsamtools",suppressUpdates=TRUE)
 
+install.packages("./spp_1.14.tar.gz")   #fialed with error: cannot find Boost headers version >= 1.41.0
+
+sudo apt-get install libboost-all-dev
+
+R
+
 install.packages("./spp_1.14.tar.gz")
 
+
+
+sudo apt-get install boost-devel
+
 #### prepare ROSE
+wget https://bitbucket.org/young_computation/rose/get/1a9bb86b5464.zip
+
+gunzip 1a9bb86b5464.zip
 
 
 #### install parallel
