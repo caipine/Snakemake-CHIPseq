@@ -241,3 +241,9 @@ python sample2json_C.py --fastq_dir fastqs/ --meta SRR.txt
 snakemake 04aln_downsample/MOLM-14_DMSO1_5_BRD4-downsample.sorted.bam
 
 
+
+
+
+nakemake --snakefile Snakefile -np --dag | dot -T png >  t.png
+nakemake --snakefile Snakefile -np --rulegraph | dot -T png >  t2.png
+
