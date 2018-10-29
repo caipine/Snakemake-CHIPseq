@@ -237,3 +237,7 @@ rm *sra
 python sample2json_C.py --fastq_dir fastqs/ --meta SRR.txt
 
 
+### rerun
+snakemake 04aln_downsample/MOLM-14_DMSO1_5_BRD4-downsample.sorted.bam
+
+
