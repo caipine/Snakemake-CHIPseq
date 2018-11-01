@@ -1,7 +1,5 @@
 # Snakemake-CHIPseq
 
-This is a pipeline for CHIPseq analysis which was originally built by crazyhottommy (https://github.com/crazyhottommy/pyflow-ChIPseq), here I will do some modifcation to fit my  work statation.
-
 ## Installation related software in CentOS 7
 
 #### install MACS1 and MACS2 through python-pip
@@ -247,7 +245,7 @@ snakemake 04aln_downsample/MOLM-14_DMSO1_5_BRD4-downsample.sorted.bam
 
 
 
-
+http://bioconductor.org/packages/devel/bioc/vignettes/ChIPseeker/inst/doc/ChIPseeker.html
 
 nakemake --snakefile Snakefile -np --dag | dot -T png >  t.png
 nakemake --snakefile Snakefile -np --rulegraph | dot -T png >  t2.png
