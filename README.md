@@ -184,6 +184,11 @@ ftp://ftp.ensembl.org/pub/release-81/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.
 ftp://ftp.ensembl.org/pub/release-81/gtf/homo_sapiens/Homo_sapiens.GRCh38.81.gtf.gz
 bowtie-build /home/exx/Documents/pyflow-ChIPseq-master/ht38/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa ht38
 
+
+#### download prebluit indexs 
+http://bowtie-bio.sourceforge.net/tutorial.shtml
+
+
 ### Download SRA data
 save follow text as SRR.txt
 
@@ -246,4 +251,6 @@ snakemake 04aln_downsample/MOLM-14_DMSO1_5_BRD4-downsample.sorted.bam
 
 nakemake --snakefile Snakefile -np --dag | dot -T png >  t.png
 nakemake --snakefile Snakefile -np --rulegraph | dot -T png >  t2.png
+
+
 
