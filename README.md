@@ -247,8 +247,8 @@ snakemake 04aln_downsample/MOLM-14_DMSO1_5_BRD4-downsample.sorted.bam
 
 http://bioconductor.org/packages/devel/bioc/vignettes/ChIPseeker/inst/doc/ChIPseeker.html
 
-nakemake --snakefile Snakefile -np --dag | dot -T png >  t.png
-nakemake --snakefile Snakefile -np --rulegraph | dot -T png >  t2.png
+snakemake --snakefile Snakefile -np --dag | dot -T png >  t.png
+snakemake --snakefile Snakefile -np --rulegraph | dot -T png >  t2.png
 
 
 
