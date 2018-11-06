@@ -252,3 +252,136 @@ snakemake --snakefile Snakefile -np --rulegraph | dot -T png >  t2.png
 
 
 
+#### R
+In Ubuntu (Linux) you have to install -dev version of udunits. Open Terminal and install below :
+sudo apt-get install libudunits2-dev
+Then the installation of udunits2, ggforce and ggraph goes without any error.
+You can also prefer install.packages('ggraph', dependencies = TRUE).
+
+
+conda install -c bioconda bioconductor-genomicfeatures 
+R
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("TxDb.Hsapiens.UCSC.hg19.knownGene", version = "3.8")
+BiocManager::install("ChIPseeker", version = "3.8")
+BiocManager::install("clusterProfiler", version = "3.8")
+BiocManager::install("org.Hs.eg.db", version = "3.8")
+BiocManager::install("ReactomePA", version = "3.8")
+
+
+## loading packages
+library(ChIPseeker)
+library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
+library(clusterProfiler)
+
+files <- getSampleFiles()
+peak <- readPeakFile(files[[4]])
+peakAnno <- annotatePeak(files[[4]], tssRegion=c(-3000, 3000),TxDb=txdb, annoDb="org.Hs.eg.db")
+plotAnnoPie(peakAnno)
+
+
+
+###################
+
+setwd("/home/qcai1/Documents/snake_ERb_CHIPseq_ht19")
+## loading packages
+library(ChIPseeker)
+library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
+library(clusterProfiler)
+
+mygetSampleFiles <- function() {
+    dir <- "/home/qcai1/Documents/snake_ERb_CHIPseq_ht19/08peak_macs1"
+    files <- list.files(dir)
+    files <- files[c(4,14,22)]
+    res <- paste(dir, files, sep = "/")
+    res <- as.list(res)
+    names(res) <- c("ES","LY","eth")
+    return(res)
+}
+
+
+files <- mygetSampleFiles()
+peak <- readPeakFile(files[[1]])
+peak <- readPeakFile(files[[2]])
+##ES
+
+peakAnno <- annotatePeak(files[[1]], tssRegion=c(-3000, 3000),TxDb=txdb, annoDb="org.Hs.eg.db")
+png(file = "plotAnnoPie_ES.png")
+plotAnnoPie(peakAnno)
+dev.off()
+#####
+
+
+##LY
+peakAnno <- annotatePeak(files[[2]], tssRegion=c(-3000, 3000),TxDb=txdb, annoDb="org.Hs.eg.db")
+png(file = "plotAnnoPie_LY500307.png")
+plotAnnoPie(peakAnno)
+dev.off()
+#####
+
+
+##control
+peakAnno <- annotatePeak(files[[3]], tssRegion=c(-3000, 3000),TxDb=txdb, annoDb="org.Hs.eg.db")
+png(file = "plotAnnoPie_control.png")
+plotAnnoPie(peakAnno)
+dev.off()
+#####
+
+
+promoter <- getPromoters(TxDb=txdb, upstream=3000, downstream=3000)
+tagMatrix <- getTagMatrix(peak, windows=promoter)
+tagMatrixList <- lapply(files, getTagMatrix, windows=promoter)
+plotAvgProf(tagMatrixList, xlim=c(-3000, 3000))
+png("Average_profiles.png")
+plotAvgProf(tagMatrixList, xlim=c(-3000, 3000))
+dev.off()
+
+
+png("Average_profiles_2.png")
+plotAvgProf(tagMatrixList, xlim=c(-3000, 3000), conf=0.95,resample=500, facet="row")
+dev.off()
+
+png("heatmap1.png")
+tagHeatmap(tagMatrixList, xlim=c(-3000, 3000), color=NULL)
+dev.off()
+
+
+peakAnnoList <- lapply(files, annotatePeak, TxDb=txdb, tssRegion=c(-3000, 3000), verbose=FALSE)
+genes= lapply(peakAnnoList, function(i) as.data.frame(i)$geneId)
+png("vennplot")
+vennplot(genes)
+dev.off()
+
+
+library(VennDiagram)
+
+
+
+venn.diagram(
+x = list(genes[[1]] , genes[[2]] , genes[[3]]),
+category.names = c("ES" , "LY " , "control"),
+filename = 'venn.png',
+        output = TRUE ,
+        imagetype="png" ,
+        height = 480 , 
+        width = 480 , 
+        resolution = 300,
+        compression = "lzw",
+        lwd = 2,
+        lty = 'blank',
+        fill = c('yellow', 'purple', 'green'),
+        cex = 1,
+        fontface = "bold",
+        fontfamily = "sans",
+        cat.cex = 0.6,
+        cat.fontface = "bold",
+        cat.default.pos = "outer",
+        cat.pos = c(-27, 27, 135),
+        cat.dist = c(0.055, 0.055, 0.085),
+        cat.fontfamily = "sans",
+        rotation = 1
+        )
+ 
