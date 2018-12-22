@@ -251,6 +251,8 @@ snakemake --snakefile Snakefile -np --dag | dot -T png >  t1.png
 
 snakemake --snakefile Snakefile -np --rulegraph | dot -T png >  t2.png
 
+http://www.webgraphviz.com/
+
 
 
 #### R
